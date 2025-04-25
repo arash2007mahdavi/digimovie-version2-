@@ -12,7 +12,11 @@ Postgres:
   MaxOpenConns: 100
   ConnMaxLifetime: 5
 Logger:
-  FilePath: ./logs.log
+  FilePath: ../logging/logs.log
   Encoding: json
   Level: debug
   Logger: zaplogger
+Redis:
+  Port: 6379
+  Host: "localhost"
+  Password: "@rash2007"

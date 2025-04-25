@@ -16,26 +16,20 @@ const (
 )
 
 const (
-	// General
-	Startup         SubCategory = "Startup"
-	ExternalService SubCategory = "ExternalService"
-
-	// Postgres
-	Migration SubCategory = "Migration"
-	Select    SubCategory = "Select"
-	Rollback  SubCategory = "Rollback"
-	Update    SubCategory = "Update"
-	Delete    SubCategory = "Delete"
-	Insert    SubCategory = "Insert"
-
-	// Internal
+	Startup             SubCategory = "Startup"
+	Add                 SubCategory = "add"
+	ExternalService     SubCategory = "ExternalService"
+	Migration           SubCategory = "Migration"
+	Select              SubCategory = "Select"
+	Rollback            SubCategory = "Rollback"
+	Update              SubCategory = "Update"
+	Delete              SubCategory = "Delete"
+	Insert              SubCategory = "Insert"
 	Api                 SubCategory = "Api"
 	HashPassword        SubCategory = "HashPassword"
 	DefaultRoleNotFound SubCategory = "DefaultRoleNotFound"
-
-	// Validation
-	MobileValidation   SubCategory = "MobileValidation"
-	PasswordValidation SubCategory = "PasswordValidation"
+	MobileValidation    SubCategory = "MobileValidation"
+	PasswordValidation  SubCategory = "PasswordValidation"
 )
 
 const (

@@ -6,8 +6,14 @@ type Config struct {
 	Server   serverConfig
 	Postgres postgresConfig
 	Logger   loggerConfig
+	Redis    redisConfig
 }
 
+type redisConfig struct {
+	Port     int
+	Host     string
+	Password string
+}
 type loggerConfig struct {
 	FilePath string
 	Encoding string

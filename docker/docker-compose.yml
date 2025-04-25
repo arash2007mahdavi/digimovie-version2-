@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  postgres:
+    container_name: digimovie_postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=arash2007mahdavi
+      - POSTGRES_PASSWORD=@rash2007
+      - POSTGRES_DB=digimovie_database
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - digimovie
+    restart: always
+  pgadmin:
+    container_name: digimovie_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: arashmahdavi2007@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: arash2007
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+    networks:
+      - digimovie
+    restart: unless-stopped
+    depends_on:
+    - postgres
+
+volumes:
+  postgres:
+  pgadmin:
+
+networks:
+  digimovie:
+    driver: bridge
