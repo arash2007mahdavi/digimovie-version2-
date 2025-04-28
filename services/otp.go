@@ -14,7 +14,7 @@ func MakeOtp() string {
 	min := 100000
 	max := 999999
 	otp := rand.Intn(max - min) + min
-	return string(otp)
+	return fmt.Sprint(otp)
 }
 
 type OtpService struct {

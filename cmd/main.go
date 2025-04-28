@@ -9,6 +9,8 @@ import (
 
 func main() {
 	cfg := config.GetConfig()
+	database.InitRedis(cfg)
+	defer database.CLoseRedis()
 	err := database.InitDB(cfg)
 	if err != nil {
 		panic(err)

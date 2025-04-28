@@ -3,17 +3,29 @@ package migrations
 import (
 	"digimovie/src/database"
 	"digimovie/src/database/models"
+	"gorm.io/gorm"
 )
 
 func AddTables() {
 	database := database.GetDB()
 	
-	tables := []interface{}{}
-
+	director := models.Director{}
 	movie := models.Movie{}
-	if !database.Migrator().HasTable(movie) {
-		tables = append(tables, movie)
-	}
+	user := models.User{}
+	
+	tables := []interface{}{}
+	checkExistsTable(database, director, &tables)
+	checkExistsTable(database, movie, &tables)
+	checkExistsTable(database, user, &tables)
 
-	database.Migrator().CreateTable(tables...)
+	err := database.Migrator().CreateTable(tables...)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func checkExistsTable(database *gorm.DB, item interface{}, tables *[]interface{}) {
+	if !database.Migrator().HasTable(item) {
+		*tables = append(*tables, item)
+	}
 }
