@@ -129,6 +129,6 @@ func (h *UserHelper) EditInformation(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, err))
 		return
 	}
-	log.Info(logging.User, logging.Edit, "user edited", nil)
+	log.Info(logging.User, logging.Edit, "user information edited", nil)
 	c.JSON(http.StatusOK, responses.GenerateNormalResponse(true, http.StatusOK, res))
 }
