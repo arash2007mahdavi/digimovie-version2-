@@ -36,7 +36,7 @@ type Director struct {
 	Firstname    string `gorm:"type:string;size:20;null"`
 	Lastname     string `gorm:"type:string;size:30;null"`
 	Username     string `gorm:"type:string;size:50;not null;unique"`
-	Password     string `gorm:"type:string;size:50;not null"`
+	Password     string `gorm:"type:string;not null"`
 	MobileNumber string `gorm:"type:string;size:11;not null;unique"`
 	Email        string `gorm:"type:string;size:80;null"`
 	Enabled      bool   `gorm:"type:bool;default:true"`
@@ -47,7 +47,7 @@ type User struct {
 	Firstname    string `gorm:"type:string;size:20;null"`
 	Lastname     string `gorm:"type:string;size:30;null"`
 	Username     string `gorm:"type:string;size:50;not null;unique"`
-	Password     string `gorm:"type:string;size:50;not null"`
+	Password     string `gorm:"type:string;not null"`
 	MobileNumber string `gorm:"type:string;size:11;not null;unique"`
 	Email        string `gorm:"type:string;size:80;null"`
 	Enabled      bool   `gorm:"type:bool;default:true"`

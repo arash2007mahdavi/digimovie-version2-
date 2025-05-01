@@ -30,7 +30,7 @@ func NewOtpService(cfg *config.Config) *OtpService {
 }
 
 type OtpDto struct {
-	Value string `josn:"value"`
+	Value string `json:"value"`
 	Valid bool `json:"valid"`
 }
 
@@ -41,7 +41,11 @@ func (s *OtpService) SetOtp(mobileNumber string, otp string, duration time.Durat
 	} else if err == nil && res.Valid {
 		return fmt.Errorf("otp exists")
 	}
-	err = database.Set(mobileNumber, otp, duration)
+	sample := OtpDto{
+		Value: otp,
+		Valid: true,
+	}
+	err = database.Set[OtpDto](mobileNumber, sample, duration)
 	if err != nil {
 		return err
 	}

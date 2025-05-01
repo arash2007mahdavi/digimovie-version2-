@@ -4,6 +4,7 @@ type UserCreate struct {
 	Username     string `json:"username" binding:"min=4,max=75,required"`
 	Password     string `json:"password" binding:"password,required"`
 	MobileNumber string `json:"mobileNumber" binding:"mobileNumber,required"`
+	CreatedBy    int    `json:"createdBy"`
 }
 
 type UserUpdate struct {

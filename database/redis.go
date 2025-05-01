@@ -43,7 +43,9 @@ func CLoseRedis() {
 func Get[T any](key string) (T, error) {
 	var dest T
 	result, err := redisClient.Get(context.Background(), key).Result()
-	if err != nil {
+	if err == redis.Nil {
+		return dest, fmt.Errorf("key '%s' does not exist", key)
+	} else if err != nil {
 		return dest, err
 	}
 	err = json.Unmarshal([]byte(result), &dest)
