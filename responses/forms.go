@@ -3,11 +3,11 @@ package responses
 import "digimovie/src/validations"
 
 type baseResponse struct {
-	Status           bool  `json:"status" binding:"required"`
-	StatusCode       int   `json:"status_code" binding:"required"`
-	Result           any   `json:"result"`
-	Error            string `json:"error"`
-	ValidationErrors []validations.ValidationError `json:"validation_error"`
+	Status           bool                          `json:"status" binding:"required"`
+	StatusCode       int                           `json:"status_code" binding:"required"`
+	Result           any                           `json:"result,omitempty"`
+	Error            string                        `json:"error,omitempty"`
+	ValidationErrors *[]validations.ValidationError `json:"validation_error,omitempty"`
 }
 
 func GenerateNormalResponse(status bool, statusCode int, result any) *baseResponse {
@@ -24,6 +24,6 @@ func GenerateResponseWithError(status bool, statusCode int, err error) *baseResp
 
 func GenerateResponseWithValidationError(status bool, statusCode int, err error) *baseResponse {
 	return &baseResponse{
-		Status: status, StatusCode: statusCode, ValidationErrors: *validations.GetValidationErrors(err),
+		Status: status, StatusCode: statusCode, ValidationErrors: validations.GetValidationErrors(err),
 	}
 }

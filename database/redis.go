@@ -41,7 +41,7 @@ func CLoseRedis() {
 }
 
 func Get[T any](key string) (T, error) {
-	var dest T = *new(T)
+	var dest T
 	result, err := redisClient.Get(context.Background(), key).Result()
 	if err != nil {
 		return dest, err

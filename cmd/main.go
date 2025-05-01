@@ -13,7 +13,7 @@ func main() {
 	defer database.CLoseRedis()
 	err := database.InitDB(cfg)
 	if err != nil {
-		panic(err)
+		panic("shit")
 	}
 	defer database.CloseDB()
 	migrations.AddTables()

@@ -8,5 +8,6 @@ import (
 
 func UserRouter(r *gin.RouterGroup) {
 	h := handlers.GetUserHelper()
+	r.GET("/get/otp", h.GetOtp)
 	r.GET("/new", h.NewUser)
 }

@@ -30,8 +30,8 @@ func NewOtpService(cfg *config.Config) *OtpService {
 }
 
 type OtpDto struct {
-	Value string
-	Valid bool
+	Value string `josn:"value"`
+	Valid bool `json:"valid"`
 }
 
 func (s *OtpService) SetOtp(mobileNumber string, otp string, duration time.Duration) error {

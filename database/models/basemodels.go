@@ -7,13 +7,13 @@ import (
 )
 
 type BaseModel struct {
-	Id string `gorm:"primarykey"`
+	Id int `gorm:"primarykey"`
 
 	CreatedAt  time.Time    `gorm:"type:TIMESTAMP with time zone;not null"`
 	ModifiedAt sql.NullTime `gorm:"type:TIMESTAMP with time zone;null"`
 	DeletedAt  sql.NullTime `gorm:"type:TIMESTAMP with time zone;null"`
 
-	CreatedBy  int         `gorm:"not null;default:null"`
+	CreatedBy  int            `gorm:"null"`
 	ModifiedBy *sql.NullInt64 `gorm:"null"`
 	DeletedBy  *sql.NullInt64 `gorm:"null"`
 }
@@ -36,8 +36,9 @@ type Director struct {
 	Firstname    string `gorm:"type:string;size:20;null"`
 	Lastname     string `gorm:"type:string;size:30;null"`
 	Username     string `gorm:"type:string;size:50;not null;unique"`
-	MobileNumber string `gorm:"type:string;size:11;null;unique"`
-	Email        string `gorm:"type:string;size:80;null;unique"`
+	Password     string `gorm:"type:string;size:50;not null"`
+	MobileNumber string `gorm:"type:string;size:11;not null;unique"`
+	Email        string `gorm:"type:string;size:80;null"`
 	Enabled      bool   `gorm:"type:bool;default:true"`
 }
 
@@ -46,7 +47,8 @@ type User struct {
 	Firstname    string `gorm:"type:string;size:20;null"`
 	Lastname     string `gorm:"type:string;size:30;null"`
 	Username     string `gorm:"type:string;size:50;not null;unique"`
-	MobileNumber string `gorm:"type:string;size:11;null;unique"`
-	Email        string `gorm:"type:string;size:80;null;unique"`
+	Password     string `gorm:"type:string;size:50;not null"`
+	MobileNumber string `gorm:"type:string;size:11;not null;unique"`
+	Email        string `gorm:"type:string;size:80;null"`
 	Enabled      bool   `gorm:"type:bool;default:true"`
 }

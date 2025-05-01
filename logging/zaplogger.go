@@ -78,7 +78,7 @@ func extraTOparams(extra map[ExtraKey]interface{}, cat Category, sub SubCategory
 
 func (l *zaplogger) Debug(cat Category, sub SubCategory, msg string, extra map[ExtraKey]interface{}) {
 	params := extraTOparams(extra, cat, sub)
-	l.logger.Debugw(msg, params)
+	l.logger.Debugw(msg, params...)
 }
 func (l *zaplogger) Debugf(template string, args ...interface{}) {
 	l.logger.Debugf(template, args)
@@ -86,7 +86,7 @@ func (l *zaplogger) Debugf(template string, args ...interface{}) {
 
 func (l *zaplogger) Info(cat Category, sub SubCategory, msg string, extra map[ExtraKey]interface{}) {
 	params := extraTOparams(extra, cat, sub)
-	l.logger.Infow(msg, params)
+	l.logger.Infow(msg, params...)
 }
 func (l *zaplogger) Infof(template string, args ...interface{}) {
 	l.logger.Infof(template, args)
@@ -94,7 +94,7 @@ func (l *zaplogger) Infof(template string, args ...interface{}) {
 
 func (l *zaplogger) Warn(cat Category, sub SubCategory, msg string, extra map[ExtraKey]interface{}) {
 	params := extraTOparams(extra, cat, sub)
-	l.logger.Warnw(msg, params)
+	l.logger.Warnw(msg, params...)
 }
 func (l *zaplogger) Warnf(template string, args ...interface{}) {
 	l.logger.Warnf(template, args)
@@ -102,7 +102,7 @@ func (l *zaplogger) Warnf(template string, args ...interface{}) {
 
 func (l *zaplogger) Error(cat Category, sub SubCategory, msg string, extra map[ExtraKey]interface{}) {
 	params := extraTOparams(extra, cat, sub)
-	l.logger.Errorw(msg, params)
+	l.logger.Errorw(msg, params...)
 }
 func (l *zaplogger) Errorf(template string, args ...interface{}) {
 	l.logger.Errorf(template, args)
@@ -110,7 +110,7 @@ func (l *zaplogger) Errorf(template string, args ...interface{}) {
 
 func (l *zaplogger) Fatal(cat Category, sub SubCategory, msg string, extra map[ExtraKey]interface{}) {
 	params := extraTOparams(extra, cat, sub)
-	l.logger.Fatalw(msg, params)
+	l.logger.Fatalw(msg, params...)
 }
 func (l *zaplogger) Fatalf(template string, args ...interface{}) {
 	l.logger.Fatalf(template, args)

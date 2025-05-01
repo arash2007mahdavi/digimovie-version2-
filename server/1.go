@@ -19,6 +19,7 @@ func InitServer(cfg *config.Config) {
 	val, ok := binding.Validator.Engine().(*validator.Validate)
 	if ok {
 		val.RegisterValidation("mobileNumber", validations.ValidateMobileNumber, true)
+		val.RegisterValidation("password", validations.ValidatePassword, true)
 	}
 
 	engine.Use(gin.Recovery(), gin.Logger())
