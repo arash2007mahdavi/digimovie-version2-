@@ -9,5 +9,6 @@ import (
 func UserRouter(r *gin.RouterGroup) {
 	h := handlers.GetUserHelper()
 	r.GET("/get/otp", h.GetOtp)
-	r.GET("/validate/otp/new", h.ValidateOtpAndSignUp)
+	r.POST("/validate/otp/new", h.ValidateOtpAndSignUp)
+	r.PUT("/edit/information", h.EditInformation)
 }

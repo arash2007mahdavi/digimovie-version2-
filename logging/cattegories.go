@@ -10,6 +10,7 @@ const (
 	Postgres        Category = "Postgres"
 	Redis           Category = "Redis"
 	Otp             Category = "Otp"
+	User            Category = "User"
 	Token           Category = "Token"
 	Validation      Category = "Validation"
 	RequestResponse Category = "RequestResponse"
@@ -17,9 +18,11 @@ const (
 
 const (
 	Startup             SubCategory = "Startup"
-	Add                 SubCategory = "add"
+	Add                 SubCategory = "Add"
 	ExternalService     SubCategory = "ExternalService"
 	Migration           SubCategory = "Migration"
+	New                 SubCategory = "New"
+	Edit                SubCategory = "Edit"
 	Select              SubCategory = "Select"
 	Rollback            SubCategory = "Rollback"
 	Update              SubCategory = "Update"

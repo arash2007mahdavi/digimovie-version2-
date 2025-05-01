@@ -94,5 +94,41 @@ func (h *UserHelper) ValidateOtpAndSignUp(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusBadGateway, responses.GenerateResponseWithError(false, http.StatusBadGateway, err))
 		return
 	}
+	log.Info(logging.User, logging.New, "new user added", nil)
+	c.JSON(http.StatusOK, responses.GenerateNormalResponse(true, http.StatusOK, res))
+}
+
+
+func (h *UserHelper) EditInformation(c *gin.Context) {
+	user_service := newUserService()
+	user := dto.UserUpdate{}
+	err := c.ShouldBindJSON(&user)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithValidationError(false, http.StatusNotAcceptable, err))
+		return
+	}
+	id := c.Query("Id")
+	newid, err := strconv.Atoi(id)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("id is invalid")))
+		return
+	}
+	creater := c.Query("Userid")
+	if len(creater) == 0 {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("userid editor didn't found")))
+		return
+	}
+	creater2, err2 := strconv.Atoi(creater)
+	if err2 != nil {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("userid editor is invalid")))
+		return
+	}
+	enable := user.Enabled
+	res, err := user_service.base.Update(c, newid, &user, creater2, enable)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, err))
+		return
+	}
+	log.Info(logging.User, logging.Edit, "user edited", nil)
 	c.JSON(http.StatusOK, responses.GenerateNormalResponse(true, http.StatusOK, res))
 }

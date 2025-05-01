@@ -47,13 +47,14 @@ func (s *BaseService[T, Tc, Tu, Tr]) Create(ctx context.Context, req *Tc) (*Tr, 
 	return common.TypeComverter[Tr](model)
 }
 
-func (s *BaseService[T, Tc, Tu, Tr]) Update(ctx context.Context, id int, req *Tu) (*Tr, error) {
+func (s *BaseService[T, Tc, Tu, Tr]) Update(ctx context.Context, id int, req *Tu, userid int, enable bool) (*Tr, error) {
 	updateMap, err := common.TypeComverter[map[string]interface{}](req)
 	if err != nil{
 		return nil, fmt.Errorf("error in Comvertering models")
 	}
-	(*updateMap)["modified_by"] = &sql.NullInt64{Int64: int64(ctx.Value("Userid").(float64)), Valid: true}
+	(*updateMap)["modified_by"] = &sql.NullInt64{Int64: int64(userid), Valid: true}
 	(*updateMap)["modified_at"] = sql.NullTime{Time: time.Now().UTC(), Valid: true}
+	(*updateMap)["enabled"] = enable
 	model := new(T)
 	tx := s.Database.WithContext(ctx).Begin()
 	err = tx.Model(model).
