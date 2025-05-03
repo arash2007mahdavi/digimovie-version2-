@@ -1,7 +1,6 @@
 package models
 
 import (
-	"context"
 	"database/sql"
 	"time"
 )
@@ -16,12 +15,6 @@ type BaseModel struct {
 	CreatedBy  int            `gorm:"null"`
 	ModifiedBy *sql.NullInt64 `gorm:"null"`
 	DeletedBy  *sql.NullInt64 `gorm:"null"`
-}
-
-func (base *BaseModel) BeforeCreate(ctx context.Context) error {
-	base.CreatedAt = time.Now().UTC()
-	base.CreatedBy = int(ctx.Value("Userid").(float64))
-	return nil
 }
 
 type Movie struct {
