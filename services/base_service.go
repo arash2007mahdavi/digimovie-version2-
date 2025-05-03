@@ -55,6 +55,7 @@ func (s *BaseService[T, Tc, Tu, Tr]) Update(ctx context.Context, id int, req *Tu
 	(*updateMap)["modified_by"] = &sql.NullInt64{Int64: int64(userid), Valid: true}
 	(*updateMap)["modified_at"] = sql.NullTime{Time: time.Now().UTC(), Valid: true}
 	(*updateMap)["enabled"] = enable
+
 	model := new(T)
 	tx := s.Database.WithContext(ctx).Begin()
 	err = tx.Model(model).
@@ -71,13 +72,12 @@ func (s *BaseService[T, Tc, Tu, Tr]) Update(ctx context.Context, id int, req *Tu
 	return res, nil
 }
 
-func (s *BaseService[T, Tc, Tu, Tr]) Delete(ctx context.Context, id int) (error) {
+func (s *BaseService[T, Tc, Tu, Tr]) Delete(ctx context.Context, id int, deleter int) (error) {
 	deleteMap := map[string]interface{}{}
-	(deleteMap)["deleted_by"] = &sql.NullInt64{Int64: int64(ctx.Value("Userid").(float64)), Valid: true}
+	(deleteMap)["deleted_by"] = &sql.NullInt64{Int64: int64(deleter), Valid: true}
 	(deleteMap)["deleted_at"] = sql.NullTime{Time: time.Now().UTC(), Valid: true}
-	if ctx.Value("Userid") == nil {
-		return fmt.Errorf("deleter Userid error")
-	}
+	(deleteMap)["enabled"] = false
+
 	model := new(T)
 	tx := s.Database.WithContext(ctx).Begin()
 	cnt := tx.Model(model).

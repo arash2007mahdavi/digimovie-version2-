@@ -107,28 +107,55 @@ func (h *UserHelper) EditInformation(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithValidationError(false, http.StatusNotAcceptable, err))
 		return
 	}
-	id := c.Query("Id")
-	newid, err := strconv.Atoi(id)
+	user_id := c.Query("UserId")
+	user_id2, err := strconv.Atoi(user_id)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("id is invalid")))
 		return
 	}
-	creater := c.Query("Userid")
-	if len(creater) == 0 {
+	editor_id := c.Query("Editorid")
+	if len(editor_id) == 0 {
 		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("userid editor didn't found")))
 		return
 	}
-	creater2, err2 := strconv.Atoi(creater)
+	editor_id2, err2 := strconv.Atoi(editor_id)
 	if err2 != nil {
 		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("userid editor is invalid")))
 		return
 	}
 	enable := user.Enabled
-	res, err := user_service.base.Update(c, newid, &user, creater2, enable)
+	res, err := user_service.base.Update(c, user_id2, &user, editor_id2, enable)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, err))
 		return
 	}
 	log.Info(logging.User, logging.Edit, "user information edited", nil)
 	c.JSON(http.StatusOK, responses.GenerateNormalResponse(true, http.StatusOK, res))
+}
+
+func (h *UserHelper) Delete(c *gin.Context) {
+	user_service := newUserService()
+	user_id := c.Query("UserId")
+	user_id2, err := strconv.Atoi(user_id)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("UserId is invalid")))
+		return
+	}
+	deleter_id := c.Query("DeleterId")
+	if len(deleter_id) == 0 {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("DeleterId didn't found")))
+		return
+	}
+	deleter_id2, err2 := strconv.Atoi(deleter_id)
+	if err2 != nil {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, fmt.Errorf("DeleterId is invalid")))
+		return
+	}
+	err = user_service.base.Delete(c, user_id2, deleter_id2)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusNotAcceptable, responses.GenerateResponseWithError(false, http.StatusNotAcceptable, err))
+		return
+	}
+	log.Info(logging.User, logging.Delete, "a user deleted", nil)
+	c.JSON(http.StatusOK, responses.GenerateNormalResponse(true, http.StatusOK, "the user deleted"))
 }

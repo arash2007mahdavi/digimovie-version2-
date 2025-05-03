@@ -87,3 +87,7 @@
 {"level":"info","ts":"2025-05-01T20:30:03.674+0330","caller":"handlers/user.go:132","msg":"user edited","AppName":"DigiMovie","LoggerType":"Zaplogger","Category":"User","SubCategory":"Edit"}
 {"level":"info","ts":"2025-05-01T20:30:04.895+0330","caller":"handlers/user.go:132","msg":"user edited","AppName":"DigiMovie","LoggerType":"Zaplogger","Category":"User","SubCategory":"Edit"}
 {"level":"info","ts":"2025-05-01T20:30:10.209+0330","caller":"handlers/user.go:132","msg":"user edited","AppName":"DigiMovie","LoggerType":"Zaplogger","Category":"User","SubCategory":"Edit"}
+{"level":"info","ts":"2025-05-03T17:30:07.403+0330","caller":"database/postgres.go:37","msg":"postgres started","AppName":"DigiMovie","LoggerType":"Zaplogger","Category":"Postgres","SubCategory":"Startup"}
+{"level":"info","ts":"2025-05-03T17:31:39.759+0330","caller":"database/postgres.go:37","msg":"postgres started","AppName":"DigiMovie","LoggerType":"Zaplogger","Category":"Postgres","SubCategory":"Startup"}
+{"level":"info","ts":"2025-05-03T17:35:25.816+0330","caller":"database/postgres.go:37","msg":"postgres started","AppName":"DigiMovie","LoggerType":"Zaplogger","Category":"Postgres","SubCategory":"Startup"}
+{"level":"info","ts":"2025-05-03T17:35:35.108+0330","caller":"handlers/user.go:159","msg":"a user deleted","AppName":"DigiMovie","LoggerType":"Zaplogger","Category":"User","SubCategory":"Delete"}

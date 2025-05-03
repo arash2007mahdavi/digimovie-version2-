@@ -11,4 +11,5 @@ func UserRouter(r *gin.RouterGroup) {
 	r.GET("/get/otp", h.GetOtp)
 	r.POST("/validate/otp/new", h.ValidateOtpAndSignUp)
 	r.PUT("/edit/information", h.EditInformation)
+	r.DELETE("/delete", h.Delete)
 }

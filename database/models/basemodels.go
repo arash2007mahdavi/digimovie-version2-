@@ -28,7 +28,7 @@ type Movie struct {
 	BaseModel
 	Name       string   `gorm:"type:string;size:50;not null"`
 	Director   Director `gorm:"foreignKey:DirectorId"`
-	DirectorId string
+	DirectorId int
 }
 
 type Director struct {
@@ -40,6 +40,7 @@ type Director struct {
 	MobileNumber string `gorm:"type:string;size:11;not null;unique"`
 	Email        string `gorm:"type:string;size:80;null"`
 	Enabled      bool   `gorm:"type:bool;default:true"`
+	Movies       []Movie
 }
 
 type User struct {
